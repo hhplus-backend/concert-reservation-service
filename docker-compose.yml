@@ -12,6 +12,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - ./database/mysql.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database/data:/var/lib/mysql
     networks:
       - app_network
 

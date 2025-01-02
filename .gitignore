@@ -2,6 +2,8 @@
 application.yml
 .env
 
+### database data ###
+database/data
 
 HELP.md
 .gradle

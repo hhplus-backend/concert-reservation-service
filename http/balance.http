@@ -1,0 +1,32 @@
+### 잔액 충전 API
+
+# Case 1: 충전 성공
+POST {{host}}/api/balance
+Content-Type: application/json
+USER-TOKEN: Bearer valid-token-1
+
+{
+  "amount": 500
+}
+
+###
+
+# Case 2: 유효하지 않은 USER-TOKEN
+POST {{host}}/api/balance
+Content-Type: application/json
+USER-TOKEN: invalid-token
+
+{
+  "amount": 500
+}
+
+###
+
+# Case 3: 유효하지 않은 금액
+POST {{host}}/api/balance
+Content-Type: application/json
+USER-TOKEN: Bearer valid-token-1
+
+{
+  "amount": -100
+}

@@ -29,6 +29,7 @@
     ```
 
 ## Requirements
+
 - 아래 5가지 API 를 구현합니다.
     - 유저 토큰 발급 API
     - 예약 가능 날짜 / 좌석 API
@@ -77,3 +78,41 @@
 - 결제 처리하고 결제 내역을 생성하는 API 를 작성합니다.
 - 결제가 완료되면 해당 좌석의 소유권을 유저에게 배정하고 대기열 토큰을 만료시킵니다.
 
+### 패키지 구조
+
+```shell
+src/
+├── main/
+│   ├── kotlin/
+│   │   └── io.hhplus.concertreservationservice/
+│   │       ├── application/         <-- Application 관련
+│   │       │   ├── facade/          <-- Facade
+│   │       │   │     └── xxxFacade  <-- usecase관련 facade
+│   │       │   ├── service/         <-- Service
+│   │       │   │     └── xxxService <-- 도메인 관련 service
+│   │       ├── config/              <-- Configuration 및 설정 클래스들
+│   │       ├── common/              <-- 공통 클래스
+│   │       │   ├── exception/       <-- 공통 서비스 Exception 정의
+│   │       │   └── response/        <-- 공통 API 응답, 에러 코드 정의
+│   │       ├── domain/              <-- 도메인 관련
+│   │       │   ├── balance/         <-- 잔고 관련
+│   │       │   │   ├── exception/   <-- 잔고 관련 Exception
+│   │       │   │   └── repository/  <-- 잔고 관련 Repository
+│   │       │   ├── concert/         <-- 콘서트, 스케줄 관련
+│   │       │   ├── payment/         <-- 결제 관련
+│   │       │   └── token/           <-- 토큰 관련
+│   │       ├── infrastructure/      <-- 인프라 관련
+│   │       │   ├── config/          <-- 인프라 Config 관련
+│   │       │   │   └── JpaConfig    <-- JPA Config
+│   │       │   └── persistence/     <-- Persistence 계층
+│   │       │       ├── jpa/         <-- JPA Repository
+│   │       │       │   └── XXXJpaRepository  <-- JpaRepository 상속받은 Repository Interface
+│   │       │       └── xxxRepositoryImpl/... <-- Repository 구현체
+│   │       └── interfaces/          <-- API 관련
+│   │           ├── advice/          <-- Controller Advice
+│   │           │   └── GlobalExceptionHandler  <-- Global Exception Handler
+│   │           └── controller/      <-- Controller
+│   └── resources/
+│       ├── application.yml          <-- 애플리케이션 설정 파일
+│       └── ...
+```

@@ -1,0 +1,63 @@
+### 콘서트 목록 조회 API
+
+# Case 1: 정상 응답
+GET {{host}}/api/concert
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+# Case 2: 유효하지 않은 USER-TOKEN
+GET {{host}}/api/concert
+USER-TOKEN: invalid-token
+
+###
+
+# Case 3: 존재하지 않는 concertId
+GET {{host}}/api/concert/999
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+### 콘서트 스케줄 조회 API
+
+# Case 1: 정상 응답
+GET {{host}}/api/concert/1/schedules
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+# Case 2: 유효하지 않은 USER-TOKEN
+GET {{host}}/api/concert/1/schedules
+USER-TOKEN: invalid-token
+
+###
+
+# Case 3: 존재하지 않는 concertId
+GET {{host}}/api/concert/999/schedules
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+### 예약 가능 날짜/좌석 조회 API
+
+# Case 1: 정상 응답
+GET {{host}}/api/concert/1/schedules/101/seats?date=2025-01-01
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+# Case 2: 유효하지 않은 USER-TOKEN
+GET {{host}}/api/concert/1/schedules/101/seats?date=2025-01-01
+USER-TOKEN: invalid-token
+
+###
+
+# Case 3: 유효하지 않은 concertId 또는 scheduleId
+GET {{host}}/api/concert/999/schedules/888/seats?date=2025-01-01
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+# Case 4: 좌석이 없는 경우
+GET {{host}}/api/concert/1/schedules/101/seats?date=2025-01-02
+USER-TOKEN: Bearer valid-token-1

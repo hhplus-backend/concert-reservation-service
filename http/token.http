@@ -1,0 +1,74 @@
+### 유저 토큰 발급 API
+
+# Case 1: waiting 토큰 발급 성공
+POST {{host}}/api/queue-token
+Content-Type: application/json
+
+{
+  "userId": "1"
+}
+
+###
+
+# Case 2: active 토큰 발급 성공
+POST {{host}}/api/queue-token
+Content-Type: application/json
+
+{
+  "userId": "2"
+}
+
+###
+
+# Case 3: 토큰 발급 실패
+POST {{host}}/api/queue-token
+Content-Type: application/json
+
+{
+  "userId": "3"
+}
+
+###
+
+# Case 4: user invalid
+POST {{host}}/api/queue-token
+Content-Type: application/json
+
+{
+  "userId": "4"
+}
+
+###
+
+# Case 5: user token issued fail
+POST {{host}}/api/queue-token
+Content-Type: application/json
+
+{
+  "userId": "5"
+}
+
+
+### 유저 토큰 상태 조회 API
+
+# Case 1: active 토큰 조회 성공
+GET {{host}}/api/queue-token
+USER-TOKEN: Bearer valid-token-1
+
+###
+
+# Case 2: waiting 토큰 조회 성공
+GET {{host}}/api/queue-token
+USER-TOKEN: Bearer valid-token-2
+
+###
+
+# Case 3: 만료된 토큰
+GET {{host}}/api/queue-token
+USER-TOKEN: Bearer expired-token-1
+
+###
+
+# Case 4: 토큰 형식에 어긋남
+GET {{host}}/api/queue-token
+USER-TOKEN: Bearer12345
