@@ -17,8 +17,21 @@ services:
     networks:
       - app_network
 
+  redis:
+    image: redis:7.2.1
+    container_name: hhplus_redis_container
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.cnf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    networks:
+      - app_network
+
 volumes:
   db_data:
+  redis_data:
 
 networks:
   app_network:

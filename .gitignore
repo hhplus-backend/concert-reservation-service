@@ -5,6 +5,7 @@ jwt.yml
 
 ### database data ###
 database/data
+redis/data
 
 HELP.md
 .gradle

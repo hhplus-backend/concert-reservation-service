@@ -33,6 +33,10 @@ dependencies {
     // swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
+    // redis
+    // https://redisson.org/docs/integration-with-spring/#spring-boot-starter
+    implementation("org.redisson:redisson-spring-boot-starter:3.43.0")
+
     // db
     testRuntimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -46,7 +50,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.4")
     testImplementation("org.testcontainers:mysql")
+//    testImplementation("com.redis:testcontainers-redis:2.2.2")
     testImplementation("io.rest-assured:rest-assured:5.3.0")
     testImplementation("io.rest-assured:json-path:5.3.0")
     testImplementation("io.rest-assured:xml-path:5.3.0")
