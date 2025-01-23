@@ -125,5 +125,89 @@ class ReservationConcurrencyServiceTest(
                     successfulApplications.get() shouldBe 1
                 }
             }
+
+            `when`("50개 스레드가 동시에 예약을 시도하면") {
+                val threadCount = 50
+                val latch = CountDownLatch(threadCount)
+                val executor: ExecutorService = Executors.newFixedThreadPool(threadCount)
+                val successfulApplications = AtomicInteger(0)
+                val failApplications = AtomicInteger(0)
+
+                for (i in 1..threadCount) {
+                    executor.submit {
+                        try {
+                            reservationService.createReservationInfo(command)
+                            successfulApplications.incrementAndGet()
+                        } catch (e: Exception) {
+                            failApplications.incrementAndGet()
+                        } finally {
+                            latch.countDown()
+                        }
+                    }
+                }
+
+                latch.await()
+                executor.shutdown()
+
+                then("예약이 한 번만 완료되어야 한다") {
+                    successfulApplications.get() shouldBe 1
+                }
+            }
+
+            `when`("1000개 스레드가 동시에 예약을 시도하면") {
+                val threadCount = 1000
+                val latch = CountDownLatch(threadCount)
+                val executor: ExecutorService = Executors.newFixedThreadPool(threadCount)
+                val successfulApplications = AtomicInteger(0)
+                val failApplications = AtomicInteger(0)
+
+                for (i in 1..threadCount) {
+                    executor.submit {
+                        try {
+                            reservationService.createReservationInfo(command)
+                            successfulApplications.incrementAndGet()
+                        } catch (e: Exception) {
+                            failApplications.incrementAndGet()
+                        } finally {
+                            latch.countDown()
+                        }
+                    }
+                }
+
+                latch.await()
+                executor.shutdown()
+
+                then("예약이 한 번만 완료되어야 한다") {
+                    successfulApplications.get() shouldBe 1
+                }
+            }
+
+            `when`("3000개 스레드가 동시에 예약을 시도하면") {
+                val threadCount = 3000
+                val latch = CountDownLatch(threadCount)
+                val executor: ExecutorService = Executors.newFixedThreadPool(threadCount)
+                val successfulApplications = AtomicInteger(0)
+                val failApplications = AtomicInteger(0)
+
+                for (i in 1..threadCount) {
+                    executor.submit {
+                        try {
+                            reservationService.createReservationInfo(command)
+                            successfulApplications.incrementAndGet()
+                        } catch (e: Exception) {
+                            failApplications.incrementAndGet()
+                        } finally {
+                            latch.countDown()
+                        }
+                    }
+                }
+
+                latch.await()
+                executor.shutdown()
+
+                then("예약이 한 번만 완료되어야 한다") {
+                    successfulApplications.get() shouldBe 1
+                }
+            }
         }
     })
